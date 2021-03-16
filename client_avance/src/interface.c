@@ -23,12 +23,10 @@ void func(int clientSocket)
  
         if ((send(clientSocket, msg, sizeof(msg), 0)) == -1)
             perror("send");
+	bzero(msg,sizeof(msg));
         recv(clientSocket, msg, MAX, 0);
-        printf ("Serveur : %s\n", msg);
- 
-    
-
-		
+        printf ("Serveur : %s\n", msg);	
+	bzero(msg,sizeof(msg));
 
  }
 int main(){
@@ -64,9 +62,6 @@ int main(){
 		pthread_create( &sniffer_thread , NULL , (void*)func , (void*)sock);
 		//Now join the thread , so that we dont terminate before the thread
 		pthread_join( sniffer_thread , NULL);}
-
-
-
 
 	close(sock);
 
